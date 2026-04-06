@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Hello from API Service v1.0 🚀', status: 'healthy', timestamp: new Date().toISOString() });
+  res.json({ message: 'Hello from API Service v1.0 ', status: 'healthy', timestamp: new Date().toISOString() });
 });
 
 app.get('/health', (req, res) => res.status(200).send('OK'));

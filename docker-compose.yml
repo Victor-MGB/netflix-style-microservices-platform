@@ -14,9 +14,17 @@ services:
 
   worker:
     build: ./app/worker
+    ports:
+      - "4000:4000"   # <-- Expose worker to host
     environment:
       - NODE_ENV=development
+      - FLASK_APP=app.py
+      - FLASK_RUN_HOST=0.0.0.0
+      - FLASK_ENV=development
     restart: unless-stopped
+    # Optional: mount local folder for hot reload
+    volumes:
+      - ./app/worker:/app
 
   frontend:
     build: ./app/frontend
