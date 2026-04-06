@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  api:
+    build: ./app/api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - WORKER_URL=http://worker:4000
+    depends_on:
+      - worker
+    restart: unless-stopped
+
+  worker:
+    build: ./app/worker
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+
+  frontend:
+    build: ./app/frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+    restart: unless-stopped
